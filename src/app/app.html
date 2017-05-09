@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <ion-icon name="planet"></ion-icon> Reloj astronómico</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="content">
+
+    <div class="data">
+        <p><b><ion-icon name="sunny"></ion-icon> Ángulo del sol:</b> {{ sunAngle?.toFixed(5) }}º ({{ sunConstelation }})</p>
+        <p><b><ion-icon name="moon"></ion-icon> Ángulo de la luna:</b> {{ moonAngle?.toFixed(5) }}º ({{ moonConstelation }})</p>
+        <p><b><ion-icon name="contrast"></ion-icon> Luna llena:</b> {{ lunationPerCent?.toFixed(5) }}%</p>
+    </div>
+
+<div class="container">
+    <div class="relative">
+        <img class="absolute" style="z-index:1" src="assets/Capa1.svg" />
+        <img class="absolute" style="z-index:2" [style.transform]="'rotate('+((-136.5 - sunAngle) % 360)+'deg)'" src="assets/Capa2.svg" />
+        <img class="absolute" style="z-index:3" [style.transform]="'rotate('+((180 + lunationAngle) % 360)+'deg)'" src="assets/Capa3.svg" />
+        <img class="absolute" style="z-index:4" [style.transform]="'rotate('+((-90 - moonAngle) % 360)+'deg)'" src="assets/Capa4.svg" />
+        <img class="absolute" style="z-index:5" src="assets/Capa5.svg" />
+    </div>
+</div>
+</ion-content>

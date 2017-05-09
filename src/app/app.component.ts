@@ -1,0 +1,60 @@
+import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SplashScreen } from '@ionic-native/splash-screen';
+
+// Variables
+const constelations = [
+  { name: 'Piscis', angle: 38 },
+  { name: 'Aries', angle: 62 },
+  { name: 'Tauro', angle: 98 },
+  { name: 'Geminis', angle: 126 },
+  { name: 'Cancer', angle: 147 },
+  { name: 'Leo', angle: 182 },
+  { name: 'Virgo', angle: 228 },
+  { name: 'Libra', angle: 246 },
+  { name: 'Escorpio', angle: 277 },
+  { name: 'Sagitario', angle: 307 },
+  { name: 'Capricornio', angle: 335 },
+  { name: 'Acuario', angle: 360 }
+];
+
+// Helpers
+const daysToMilliseconds = days => days * 24 * 60 * 60 * 1000;
+const calculateAngle = (period, initialAngle, referenceDate) => (date) => (initialAngle + (((360 / period) * (date - referenceDate)))) % 360;
+
+// Getters
+const getSunAngleByDate = calculateAngle(daysToMilliseconds(365), 38, new Date('2017-04-19T00:00:00.752Z'));
+const getMoonAngleByDate = calculateAngle(daysToMilliseconds(27.333), 147, new Date('2017-05-03T11:00:00.752Z'));
+const getLunationAngleByDate = calculateAngle(daysToMilliseconds(29.5), 0, new Date('2017-01-28T01:07:00.752Z'));
+const getLunationPerCent = angle => angle <= 180 ? ((angle * 100) / 180) : (100 - (((angle - 180) * 100) / 180))
+const getConstelationByAngle = angle => constelations.filter(c => c.angle >= angle)[0];
+
+@Component({
+  templateUrl: 'app.html'
+})
+export class MyApp {
+  sunAngle: number;
+  moonAngle: number;
+  lunationAngle: number;
+  sunConstelation: string;
+  moonConstelation: string;
+  screenSize: number;
+  lunationPerCent: number
+
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    setInterval(() => {
+      const now = new Date();
+      this.sunAngle = getSunAngleByDate(now);
+      this.moonAngle = getMoonAngleByDate(now);
+      this.lunationAngle = getLunationAngleByDate(now);
+      this.lunationPerCent = getLunationPerCent(this.lunationAngle);
+      this.sunConstelation = getConstelationByAngle(this.sunAngle).name;
+      this.moonConstelation = getConstelationByAngle(this.moonAngle).name;
+    }, 100);
+    platform.ready().then(() => {
+      statusBar.styleDefault();
+      splashScreen.hide();
+    });
+  }
+}

@@ -1,0 +1,79 @@
+.footer {
+  font-size: 14px !important;
+}
+
+.content {
+  text-align: center;
+  background-image: url("/assets/universe.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.toolbar-background {
+  background-color: #1A237E !important;
+}
+
+.data {
+  background-color: rgba(0,0, 0, 0.5) !important;
+  padding: 20px;
+}
+
+.data,
+.toolbar-title {
+  color: #fafafa !important;
+}
+
+.clock {
+  height: 90vmin;
+  width: 90vmin;
+}
+
+.container {
+  width: 100%;
+
+  .relative {
+    position: relative;
+    width: 170vw;
+    margin-left: -76vw;
+    text-align: center;
+    height: 50vh;
+
+    .absolute {
+      position: absolute;
+      width: 50%;
+    }
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .container .relative {
+    position: relative;
+    width: 100vw;
+    margin-left: -25vw;
+    text-align: center;
+    height: 50vh;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .container .relative {
+    position: relative;
+    width: 80vw;
+    margin-left: -9vw;
+    text-align: center;
+    height: 50vh;
+  }
+}
+
+@media screen and (min-width: 1190px) {
+  .container .relative {
+    position: relative;
+    width: 60vw;
+    margin-left: 6vw;
+    text-align: center;
+    height: 50vh;
+  }
+}
+
