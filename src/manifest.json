@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Reloj astronomico",
+  "short_name": "Reloj astronomico",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{

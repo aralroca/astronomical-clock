@@ -20,7 +20,7 @@
     <div class="relative">
         <img class="absolute" style="z-index:1" src="assets/Capa1.svg" />
         <img class="absolute" style="z-index:2" [style.transform]="'rotate('+((-136.5 - sunAngle) % 360)+'deg)'" src="assets/Capa2.svg" />
-        <img class="absolute" style="z-index:3" [style.transform]="'rotate('+(((lunationAngle - moonAngle)) % 360)+'deg)'" src="assets/Capa3.svg" />
+        <img class="absolute" style="z-index:3" [style.transform]="'rotate('+(((-180 + lunationAngle - moonAngle)) % 360)+'deg)'" src="assets/Capa3.svg" />
         <img class="absolute" style="z-index:4" [style.transform]="'rotate('+((-90 - moonAngle) % 360)+'deg)'" src="assets/Capa4.svg" />
         <img class="absolute" style="z-index:5" src="assets/Capa5.svg" />
     </div>
