@@ -21,7 +21,7 @@ const constelations = [
 
 // Helpers
 const daysToMilliseconds = days => days * 24 * 60 * 60 * 1000;
-const calculateAngle = (period, initialAngle, referenceDate) => (date) => (initialAngle + (((360 / period) * (date - referenceDate)))) % 360;
+const calculateAngle = (period, initialAngle, referenceDate) => (date) => (initialAngle + (((360 / period) * Math.abs(date - referenceDate)))) % 360;
 
 // Getters
 const getSunAngleByDate = calculateAngle(daysToMilliseconds(365), 38, new Date('2017-04-19T00:00:00.752Z'));
@@ -40,14 +40,24 @@ export class MyApp {
   sunConstelation: string;
   moonConstelation: string;
   screenSize: number;
-  lunationPerCent: number
+  lunationPerCent: number;
+  timeStart;
+
+  realTime() {
+    this.timeStart = undefined;
+  }
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     setInterval(() => {
-      const now = new Date();
-      this.sunAngle = getSunAngleByDate(now);
-      this.moonAngle = getMoonAngleByDate(now);
-      this.lunationAngle = getLunationAngleByDate(now);
+      let date;
+      if (!this.timeStart) {
+        date = new Date();
+      } else {
+        date = new Date(this.timeStart)
+      }
+      this.sunAngle = getSunAngleByDate(date);
+      this.moonAngle = getMoonAngleByDate(date);
+      this.lunationAngle = getLunationAngleByDate(date);
       this.lunationPerCent = getLunationPerCent(this.lunationAngle);
       this.sunConstelation = getConstelationByAngle(this.sunAngle).name;
       this.moonConstelation = getConstelationByAngle(this.moonAngle).name;

@@ -25,4 +25,20 @@
         <img class="absolute" style="z-index:5" src="assets/Capa5.svg" />
     </div>
 </div>
+<div class="filter">
+    <button ion-button color="dark">
+        <ion-datetime 
+            cancelText="Volver a tiempo real"
+            doneText="Seleccionar"
+            placeholder="Tiempo real"
+            min="1600-01-01"
+            max="2500-12-31"
+            (ionCancel)="realTime()"
+            [displayFormat]="timeStart ? 'MMM DD YYYY h mm A' : 'Tie\m\po real'"
+            (change)="isRealTime = false"
+            pickerFormat="MMM DD YYYY h mm A"
+            [(ngModel)]="timeStart">
+        </ion-datetime>
+    </button>
+</div>
 </ion-content>

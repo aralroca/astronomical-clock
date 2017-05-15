@@ -17,6 +17,16 @@
   background-color: #1A237E !important;
 }
 
+.filter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.datetime-placeholder {
+  color: white !important;
+}
+
 .data {
   background-color: rgba(0, 0, 0, 0.5) !important;
   padding: 20px;
@@ -48,7 +58,6 @@
     }
   }
 }
-
 @media screen and (min-width: 480px) {
   .container .relative {
     position: relative;
@@ -58,7 +67,6 @@
     height: 50vh;
   }
 }
-
 @media screen and (min-width: 990px) {
   .container .relative {
     position: relative;
@@ -68,7 +76,6 @@
     height: 50vh;
   }
 }
-
 @media screen and (min-width: 1190px) {
   .container .relative {
     position: relative;
@@ -78,4 +85,3 @@
     height: 50vh;
   }
 }
-
