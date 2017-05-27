@@ -24,9 +24,9 @@ const daysToMilliseconds = days => days * 24 * 60 * 60 * 1000;
 const calculateAngle = (period, initialAngle, referenceDate) => (date) => (initialAngle + (((360 / period) * Math.abs(date - referenceDate)))) % 360;
 
 // Getters
-const getSunAngleByDate = calculateAngle(daysToMilliseconds(365), 38, new Date('2017-04-19T00:00:00.752Z'));
-const getMoonAngleByDate = calculateAngle(daysToMilliseconds(27.333), 147, new Date('2017-05-03T11:00:00.752Z'));
-const getLunationAngleByDate = calculateAngle(daysToMilliseconds(29.5), 0, new Date('2017-01-28T01:07:00.752Z'));
+const getSunAngleByDate = calculateAngle(daysToMilliseconds(365.26), 38, new Date('2017-04-19T00:00:00.752Z'));
+const getMoonAngleByDate = calculateAngle(daysToMilliseconds(27.321597222), 147, new Date('2017-05-03T11:00:00.752Z'));
+const getLunationAngleByDate = calculateAngle(daysToMilliseconds(29.53059028), 0, new Date('2017-01-28T01:07:00.752Z'));
 const getLunationPerCent = angle => angle <= 180 ? ((angle * 100) / 180) : (100 - (((angle - 180) * 100) / 180))
 const getConstelationByAngle = angle => constelations.filter(c => c.angle >= angle)[0];
 
