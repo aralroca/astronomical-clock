@@ -8,11 +8,11 @@
 <ion-content class="content">
 
     <div class="data">
-        <p><b><ion-icon name="sunny"></ion-icon> Ángulo del sol:</b> {{ sunAngle?.toFixed(5) }}º ({{ sunConstelation }})</p>
-        <p><b><ion-icon name="moon"></ion-icon> Ángulo de la luna:</b> {{ moonAngle?.toFixed(5) }}º ({{ moonConstelation }})</p>
-        <p><b><ion-icon name="contrast"></ion-icon> Luna llena:</b> {{ lunationPerCent?.toFixed(5) }}%
+        <p><b><ion-icon name="sunny"></ion-icon> Constelación del sol: </b>{{ sunConstelation }}</p>
+        <p><b><ion-icon name="moon"></ion-icon> Constelación de la luna: </b>{{ moonConstelation }}</p>
+        <p><b>Fase de la luna:</b> {{ fase }} ({{ lunationPerCent?.toFixed(2) }}%
             <ion-icon *ngIf="lunationAngle > 180" name="arrow-down"></ion-icon>
-            <ion-icon *ngIf="lunationAngle <= 180" name="arrow-up"></ion-icon>
+            <ion-icon *ngIf="lunationAngle <= 180" name="arrow-up"></ion-icon>)
         </p> 
     </div>
 
@@ -30,11 +30,11 @@
         <ion-datetime 
             cancelText="Volver a tiempo real"
             doneText="Seleccionar"
-            placeholder="Tiempo real"
+            placeholder="Ahora"
             min="1600-01-01"
-            max="2500-12-31"
+            max="2100-12-31"
             (ionCancel)="realTime()"
-            [displayFormat]="timeStart ? 'MMM DD YYYY h mm A' : 'Tie\m\po real'"
+            [displayFormat]="timeStart ? 'MMM DD YYYY h mm A' : 'RT'"
             (change)="isRealTime = false"
             pickerFormat="MMM DD YYYY h mm A"
             [(ngModel)]="timeStart">

@@ -29,6 +29,17 @@ const getMoonAngleByDate = calculateAngle(daysToMilliseconds(27.321597222), 147,
 const getLunationAngleByDate = calculateAngle(daysToMilliseconds(29.53059028), 0, new Date('2017-01-28T01:07:00.752Z'));
 const getLunationPerCent = angle => angle <= 180 ? ((angle * 100) / 180) : (100 - (((angle - 180) * 100) / 180))
 const getConstelationByAngle = angle => constelations.filter(c => c.angle >= angle)[0];
+const getFase = angle => {
+  if (angle < 3.6) return 'Luna nueva';
+  if (angle < 61.2) return 'Creciente cóncava';
+  if (angle < 117) return 'Cuarto creciente';
+  if (angle < 172) return 'Creciente convexa';
+  if (angle < 180) return 'Luna llena';
+  if (angle < 241.2) return 'Menguante convexa';
+  if (angle < 297) return 'Cuarto menguante';
+  if (angle < 354.6) return 'Menguante cóncava';
+  if (angle < 360) return 'Luna nueva';
+}
 
 @Component({
   templateUrl: 'app.html'
@@ -40,6 +51,7 @@ export class MyApp {
   sunConstelation: string;
   moonConstelation: string;
   screenSize: number;
+  fase: string;
   lunationPerCent: number;
   timeStart;
 
@@ -61,7 +73,8 @@ export class MyApp {
       this.lunationPerCent = getLunationPerCent(this.lunationAngle);
       this.sunConstelation = getConstelationByAngle(this.sunAngle).name;
       this.moonConstelation = getConstelationByAngle(this.moonAngle).name;
-    }, 100);
+      this.fase = getFase(this.lunationAngle);
+    }, 1000);
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
