@@ -34,9 +34,9 @@
             min="1600-01-01"
             max="2100-12-31"
             (ionCancel)="realTime()"
-            [displayFormat]="timeStart ? 'MMM DD YYYY h mm A' : 'RT'"
-            (change)="isRealTime = false"
-            pickerFormat="MMM DD YYYY h mm A"
+            [displayFormat]="timeStart ? 'MMM DD YYYY h mm' : 'RT'"
+            (change)="initInterval()"
+            pickerFormat="MMM DD YYYY h mm"
             [(ngModel)]="timeStart">
         </ion-datetime>
     </button>

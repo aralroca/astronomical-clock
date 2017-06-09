@@ -41,6 +41,8 @@ const getFase = angle => {
   if (angle < 360) return 'Luna nueva';
 }
 
+let interval;
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -57,27 +59,35 @@ export class MyApp {
 
   realTime() {
     this.timeStart = undefined;
+    this.initInterval();
+  }
+
+  initInterval() {
+    let date;
+    if (!this.timeStart) {
+      date = new Date();
+    } else {
+      date = new Date(this.timeStart)
+    }
+    this.sunAngle = getSunAngleByDate(date);
+    this.moonAngle = getMoonAngleByDate(date);
+    this.lunationAngle = getLunationAngleByDate(date);
+    this.lunationPerCent = getLunationPerCent(this.lunationAngle);
+    this.sunConstelation = getConstelationByAngle(this.sunAngle).name;
+    this.moonConstelation = getConstelationByAngle(this.moonAngle).name;
+    this.fase = getFase(this.lunationAngle);
   }
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    setInterval(() => {
-      let date;
-      if (!this.timeStart) {
-        date = new Date();
-      } else {
-        date = new Date(this.timeStart)
-      }
-      this.sunAngle = getSunAngleByDate(date);
-      this.moonAngle = getMoonAngleByDate(date);
-      this.lunationAngle = getLunationAngleByDate(date);
-      this.lunationPerCent = getLunationPerCent(this.lunationAngle);
-      this.sunConstelation = getConstelationByAngle(this.sunAngle).name;
-      this.moonConstelation = getConstelationByAngle(this.moonAngle).name;
-      this.fase = getFase(this.lunationAngle);
-    }, 1000);
+    this.initInterval();
+    interval = setInterval(this.initInterval.bind(this), 1000);
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  ngOnDestroy() {
+    if(interval) clearInterval(interval)
   }
 }
